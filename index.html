@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FarziBoyDev — Front‑End Developer</title>
+  <meta name="description" content="Modern, responsive Bootstrap portfolio for a front-end developer." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f680.png" />
+
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Google Font: Inter (optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand: #6f42c1; /* Bootstrap purple */
+      --brand-2: #20c997; /* teal */
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+
+    /* Section spacing */
+    section {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    /* Navbar */
+    .navbar-brand span {
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      font-weight: 800;
+    }
+    .nav-link.active { color: var(--brand) !important; font-weight: 600; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding-top: 7rem; padding-bottom: 7rem;
+      background: radial-gradient(80% 80% at 50% 20%, rgba(111,66,193,.12) 0%, rgba(32,201,151,.06) 40%, transparent 70%);
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap:.5rem;
+      border: 1px dashed var(--bs-border-color);
+      border-radius: 50px; padding: .35rem .75rem; font-size: .85rem;
+      background-color: var(--bs-body-bg);
+    }
+    .hero-blob {
+      position:absolute; inset:auto -10% -30% auto; width: 420px; height: 420px;
+      filter: blur(60px); opacity:.45; pointer-events:none;
+      background: conic-gradient(from 180deg at 50% 50%, var(--brand), var(--brand-2), transparent 60%);
+      border-radius: 50%; transform: rotate(10deg);
+    }
+
+    /* Cards hover */
+    .card.hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
+    .card.hover-lift:hover { transform: translateY(-6px); box-shadow: 0 .75rem 2rem rgba(0,0,0,.08); }
+
+    /* Timeline */
+    .timeline {
+      position: relative; margin-left: 1rem; padding-left: 1.5rem;
+    }
+    .timeline::before {
+      content:""; position:absolute; left: .25rem; top: .25rem; bottom: .25rem; width: 2px;
+      background: linear-gradient(var(--brand), var(--brand-2)); opacity:.5;
+    }
+    .timeline-item { position: relative; margin-bottom: 2rem; }
+    .timeline-item::before {
+      content:""; position:absolute; left: -1.05rem; top:.25rem; width: .75rem; height: .75rem;
+      border-radius: 50%; background: var(--brand);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--brand) 20%, transparent);
+    }
+
+    /* Badges cloud */
+    .skill-badge { font-weight: 600; border-radius: 999px; border: 1px solid var(--bs-border-color); padding:.35rem .75rem; }
+
+    /* Contact */
+    .contact-card { backdrop-filter: blur(6px); border: 1px solid var(--bs-border-color);
+      box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.06); }
+
+    /* Footer */
+    footer a { text-decoration: none; }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="100" tabindex="0">
+  <!-- Navbar -->
+  <nav id="mainNav" class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home" aria-label="Go to top"><i class="bi bi-code-slash me-2"></i><span>FarziBoyDev</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <a href="#projects" class="btn btn-primary"><i class="bi bi-rocket-takeoff me-2"></i>View Work</a>
+          <button id="themeToggle" class="btn btn-outline-secondary" aria-label="Toggle theme"><i class="bi bi-sun"></i></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home" class="hero bg-body">
+    <div class="hero-blob d-none d-md-block"></div>
+    <div class="container position-relative">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="hero-badge mb-3"><i class="bi bi-lightning-charge"></i> Front‑End Developer • UI Engineer</span>
+          <h1 class="display-4 fw-extrabold lh-tight mb-3">I build fast, delightful web experiences.</h1>
+          <p class="lead text-secondary mb-4">Specializing in modern stacks and Bootstrap‑first, responsive interfaces. I turn ideas into polished, production‑ready UIs.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#contact" class="btn btn-lg btn-primary"><i class="bi bi-envelope-paper-heart me-2"></i>Hire Me</a>
+            <a href="#projects" class="btn btn-lg btn-outline-primary"><i class="bi bi-grid-3x3-gap me-2"></i>See Projects</a>
+            <a class="btn btn-lg btn-outline-secondary" href="#" onclick="alert('Replace with your resume link')"><i class="bi bi-file-earmark-arrow-down me-2"></i>Download CV</a>
+          </div>
+          <div class="d-flex gap-3 mt-4">
+            <a class="text-body" href="https://github.com/" target="_blank" rel="noreferrer"><i class="bi bi-github fs-3"></i></a>
+            <a class="text-body" href="https://linkedin.com/" target="_blank" rel="noreferrer"><i class="bi bi-linkedin fs-3"></i></a>
+            <a class="text-body" href="mailto:you@example.com"><i class="bi bi-envelope fs-3"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card contact-card p-3 p-md-4 rounded-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img class="rounded-circle shadow" src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Avatar" width="64" height="64"/>
+              <div>
+                <div class="small text-secondary">Available for freelance</div>
+                <div class="fw-semibold">Let’s ship something great</div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="border rounded-3 p-3 h-100">
+                  <div class="text-secondary small">Projects</div>
+                  <div class="h4 mb-0">18+</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="border rounded-3 p-3 h-100">
+                  <div class="text-secondary small">Years</div>
+                  <div class="h4 mb-0">3</div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="border rounded-3 p-3">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                      <div class="text-secondary small">Next slot</div>
+                      <div class="fw-semibold">September 2025</div>
+                    </div>
+                    <a href="#contact" class="btn btn-sm btn-primary">Book a call</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <img class="img-fluid rounded-4 shadow" src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1400&auto=format&fit=crop" alt="Developer at work" />
+        </div>
+        <div class="col-lg-6">
+          <span class="badge text-bg-light border mb-2"><i class="bi bi-person-workspace me-1"></i> About me</span>
+          <h2 class="fw-bold">Clean, accessible UI with real‑world performance.</h2>
+          <p class="text-secondary">I focus on maintainable systems, component libraries, and micro‑interactions that make products feel premium. I’m comfortable shipping in Agile teams and owning features end‑to‑end.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="border rounded-3 p-3 h-100">
+                <div class="fw-semibold">What I do</div>
+                <ul class="small text-secondary mb-0 mt-2">
+                  <li>Responsive UI with Bootstrap</li>
+                  <li>Design systems & components</li>
+                  <li>Performance tuning (LCP/CLS)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="border rounded-3 p-3 h-100">
+                <div class="fw-semibold">Stack</div>
+                <ul class="small text-secondary mb-0 mt-2">
+                  <li>HTML • CSS/Sass • JS/TS</li>
+                  <li>Bootstrap • React basics</li>
+                  <li>Git • CI/CD</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="bg-body-tertiary">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+        <div>
+          <span class="badge text-bg-light border mb-2"><i class="bi bi-stars me-1"></i> Skills</span>
+          <h2 class="fw-bold mb-0">Tools I’m effective with</h2>
+        </div>
+        <a class="btn btn-outline-primary" href="#projects"><i class="bi bi-grid me-2"></i>Browse projects</a>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <span class="skill-badge">HTML5</span>
+        <span class="skill-badge">CSS3</span>
+        <span class="skill-badge">Sass</span>
+        <span class="skill-badge">Bootstrap 5</span>
+        <span class="skill-badge">JavaScript</span>
+        <span class="skill-badge">TypeScript</span>
+        <span class="skill-badge">Git</span>
+        <span class="skill-badge">Webpack/Vite</span>
+        <span class="skill-badge">REST APIs</span>
+        <span class="skill-badge">Accessibility</span>
+        <span class="skill-badge">SEO</span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>Bootstrap</span><span class="text-secondary">90%</span></div>
+            <div class="progress" role="progressbar" aria-label="Bootstrap" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar bg-primary" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>JavaScript</span><span class="text-secondary">80%</span></div>
+            <div class="progress" role="progressbar" aria-label="JavaScript" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>Accessibility</span><span class="text-secondary">85%</span></div>
+            <div class="progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar bg-success" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between"><span>Performance</span><span class="text-secondary">75%</span></div>
+            <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar bg-info" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge text-bg-light border mb-2"><i class="bi bi-grid-1x2 me-1"></i> Selected work</span>
+        <h2 class="fw-bold">Projects that ship value</h2>
+        <p class="text-secondary">A mix of UI builds, components, and landing pages. Hover to preview.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Project Card 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift rounded-4 overflow-hidden h-100">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop" class="card-img-top" alt="Dashboard UI" />
+            <div class="card-body">
+              <h5 class="card-title">Analytics Dashboard</h5>
+              <p class="card-text text-secondary">Reusable Bootstrap components and responsive charts for a SaaS admin.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">View case study</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project Card 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift rounded-4 overflow-hidden h-100">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" class="card-img-top" alt="Marketing site" />
+            <div class="card-body">
+              <h5 class="card-title">Marketing Site</h5>
+              <p class="card-text text-secondary">Optimized landing page with A/B‑tested hero and accessible forms.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Live demo</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project Card 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift rounded-4 overflow-hidden h-100">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" class="card-img-top" alt="Component library" />
+            <div class="card-body">
+              <h5 class="card-title">Component Library</h5>
+              <p class="card-text text-secondary">A lightweight Bootstrap‑based kit for rapid product MVPs.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Docs</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project Card 4 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift rounded-4 overflow-hidden h-100">
+            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1200&auto=format&fit=crop" class="card-img-top" alt="Ecommerce UI" />
+            <div class="card-body">
+              <h5 class="card-title">E‑commerce UI</h5>
+              <p class="card-text text-secondary">Product grid, filters, and cart drawer with Bootstrap utilities.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Preview</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project Card 5 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift rounded-4 overflow-hidden h-100">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" class="card-img-top" alt="Portfolio" />
+            <div class="card-body">
+              <h5 class="card-title">Personal Portfolio</h5>
+              <p class="card-text text-secondary">This template — fast, accessible, and easy to extend.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Get code</a>
+            </div>
+          </div>
+        </div>
+        <!-- Project Card 6 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift rounded-4 overflow-hidden h-100">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&auto=format&fit=crop" class="card-img-top" alt="Mobile UI" />
+            <div class="card-body">
+              <h5 class="card-title">Mobile‑first UI</h5>
+              <p class="card-text text-secondary">Tuned for Core Web Vitals with minimal JS.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Case study</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="bg-body-tertiary">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge text-bg-light border mb-2"><i class="bi bi-briefcase me-1"></i> Background</span>
+        <h2 class="fw-bold">Experience</h2>
+        <p class="text-secondary">Highlights from recent roles and collaborations.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="d-flex flex-wrap gap-2 align-items-baseline">
+            <h5 class="mb-0">Front‑End Developer</h5>
+            <span class="badge text-bg-primary">2023 — Present</span>
+          </div>
+          <div class="text-secondary small">Freelance</div>
+          <ul class="mt-2 text-secondary">
+            <li>Built componentized UIs with Bootstrap 5 and utility‑first patterns.</li>
+            <li>Partnered with designers to deliver accessible, WCAG‑compliant flows.</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="d-flex flex-wrap gap-2 align-items-baseline">
+            <h5 class="mb-0">UI Engineer (Contract)</h5>
+            <span class="badge text-bg-secondary">2022 — 2023</span>
+          </div>
+          <div class="text-secondary small">Acme Startup</div>
+          <ul class="mt-2 text-secondary">
+            <li>Implemented design tokens and a shared components library.</li>
+            <li>Improved LCP by ~35% through image optimization and lazy loading.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge text-bg-light border mb-2"><i class="bi bi-chat-quote me-1"></i> What clients say</span>
+        <h2 class="fw-bold">Testimonials</h2>
+      </div>
+
+      <div id="testiCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <figure class="text-center">
+              <blockquote class="blockquote">“Delivered pixel‑perfect UI ahead of schedule. Great communication.”</blockquote>
+              <figcaption class="blockquote-footer">Sarah M., Product Manager</figcaption>
+            </figure>
+          </div>
+          <div class="carousel-item">
+            <figure class="text-center">
+              <blockquote class="blockquote">“Our metrics improved immediately — fast and accessible.”</blockquote>
+              <figcaption class="blockquote-footer">Ahmed K., Founder</figcaption>
+            </figure>
+          </div>
+          <div class="carousel-item">
+            <figure class="text-center">
+              <blockquote class="blockquote">“Clean codebase and reusable components. Highly recommended.”</blockquote>
+              <figcaption class="blockquote-footer">Liu W., Tech Lead</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testiCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testiCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-body-tertiary">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-5">
+          <div class="h-100 p-4 p-md-5 rounded-4 border contact-card">
+            <h3 class="fw-bold">Let’s talk</h3>
+            <p class="text-secondary">Describe your project goals and timeline. I usually reply within 24 hours.</p>
+            <div class="d-flex flex-column gap-3">
+              <div><i class="bi bi-envelope me-2"></i><a href="mailto:you@example.com">you@example.com</a></div>
+              <div><i class="bi bi-geo-alt me-2"></i>Karachi, PK (Remote‑friendly)</div>
+              <div class="d-flex gap-3">
+                <a class="text-body" href="#"><i class="bi bi-github fs-4"></i></a>
+                <a class="text-body" href="#"><i class="bi bi-linkedin fs-4"></i></a>
+                <a class="text-body" href="#"><i class="bi bi-twitter-x fs-4"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="card h-100 rounded-4">
+            <div class="card-body p-4 p-md-5">
+              <form class="needs-validation" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="name" placeholder="Your name" required />
+                      <label for="name">Your name</label>
+                      <div class="invalid-feedback">Please enter your name.</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input type="email" class="form-control" id="email" placeholder="name@example.com" required />
+                      <label for="email">Email</label>
+                      <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="subject" placeholder="Project subject" required />
+                      <label for="subject">Subject</label>
+                      <div class="invalid-feedback">Please provide a subject.</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <textarea class="form-control" placeholder="Tell me about your project" id="message" style="height: 140px" required></textarea>
+                      <label for="message">Tell me about your project</label>
+                      <div class="invalid-feedback">Please add a brief message.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-grid d-sm-flex gap-3 mt-4">
+                  <button class="btn btn-primary btn-lg" type="submit"><i class="bi bi-send me-2"></i>Send message</button>
+                  <button class="btn btn-outline-secondary btn-lg" type="reset"><i class="bi bi-arrow-counterclockwise me-2"></i>Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-top py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div class="small text-secondary">© <span id="year"></span> FarziBoyDev. All rights reserved.</div>
+      <div class="d-flex align-items-center gap-3">
+        <a class="small" href="#home">Back to top</a>
+        <span class="small">•</span>
+        <a class="small" href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Active link on scroll (ScrollSpy already enabled via data attributes)
+
+    // Theme toggle (light/dark) using Bootstrap 5.3 data-bs-theme
+    const themeBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-bs-theme', savedTheme);
+    themeBtn?.addEventListener('click', () => {
+      const current = root.getAttribute('data-bs-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-bs-theme', next);
+      localStorage.setItem('theme', next);
+      themeBtn.innerHTML = next === 'light' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon"></i>';
+    });
+
+    // Bootstrap validation
+    (() => {
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', evt => {
+          if (!form.checkValidity()) {
+            evt.preventDefault();
+            evt.stopPropagation();
+          } else {
+            evt.preventDefault();
+            // Replace this with your form handler / endpoint
+            const data = {
+              name: document.getElementById('name').value,
+              email: document.getElementById('email').value,
+              subject: document.getElementById('subject').value,
+              message: document.getElementById('message').value
+            };
+            console.log('Form submitted', data);
+            alert('Thanks! Your message has been sent.');
+            form.reset();
+            form.classList.remove('was-validated');
+            return false;
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
